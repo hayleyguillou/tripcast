@@ -1,8 +1,16 @@
 package com.comp4020.tripcast;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.FrameLayout;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -11,12 +19,43 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private DrawerLayout mDrawerLayout;
+    private FrameLayout mLeftDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        mLeftDrawer = (FrameLayout) findViewById(R.id.left_drawer);
+
         setUpMapIfNeeded();
+        setUpLocation();
+
+
+        /*hideAlphaPane();
+        View omegaPane = findViewById(R.id.drawer_layout);
+        omegaPane.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft(){
+                showAlphaPane();
+                super.onSwipeLeft();
+            }
+
+            @Override
+            public void onSwipeRight(){
+                hideAlphaPane();
+                super.onSwipeRight();
+            }
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //hideAlphaPane();
+                return super.onTouch(v, event);
+            }
+        });*/
     }
 
     @Override
@@ -61,5 +100,38 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    }
+
+    private void setUpLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        LatLng latLng;
+        if(location == null) {
+            latLng = new LatLng(49.8573,-97.1373);
+        } else {
+            latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        }
+
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng, 14.0f) );
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("Current Location"));
+    }
+
+    private void hideAlphaPane() {
+        View alphaPane = findViewById(R.id.left_drawer);
+        if (alphaPane.getVisibility() == View.VISIBLE) {
+            alphaPane.setVisibility(View.GONE); }
+    }
+
+    /** * Method to show the Alpha pane */
+    private void showAlphaPane() {
+        View alphaPane = findViewById(R.id.drawer_layout);
+        if (alphaPane.getVisibility() == View.GONE) {
+            alphaPane.setVisibility(View.VISIBLE);
+        }
     }
 }
