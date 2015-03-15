@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Button;
+import android.graphics.Color;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,8 +22,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.*;
 
 import com.comp4020.tripcast.IconAdder;
+
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -42,6 +48,7 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
         setUpLocation();
         setUpTripSetWindow();
+        testDrawLine();
 
         /*hideAlphaPane();
         View omegaPane = findViewById(R.id.drawer_layout);
@@ -146,6 +153,36 @@ public class MapsActivity extends FragmentActivity {
 
             }
         });
+    }
+
+    //I know this is kind of weird but here's how to draw routes on the map!
+    //you just need a start and end dest, google figures out the route from there
+    private void testDrawLine() {
+        GMapV2Direction directions = new GMapV2Direction();
+        LatLng orig = new LatLng(40.8573,-97.1373);
+        LatLng dest = new LatLng(49.8773,-97.1373);
+        Document doc = null;
+
+        try {
+            doc = directions.execute(orig, dest).get();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (doc != null) {
+            ArrayList<LatLng> directionPts = directions.getDirection(doc);
+
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.RED);
+
+            for (int i = 0; i < directionPts.size(); i++) {
+                rectLine.add(directionPts.get(i));
+            }
+
+
+            mMap.addPolyline(rectLine);
+        }
     }
 
     private void hideAlphaPane() {
