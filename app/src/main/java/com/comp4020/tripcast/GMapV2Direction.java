@@ -1,7 +1,10 @@
 package com.comp4020.tripcast;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +15,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -257,4 +262,79 @@ public class GMapV2Direction extends AsyncTask<LatLng, Void, Document>{
         }
         return poly;
     }
+
+    private String convertStreamToString(final InputStream input) throws Exception {
+        try {
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            final StringBuffer sBuf = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sBuf.append(line);
+            }
+            return sBuf.toString();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                input.close();
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+    }
+
+//    public List<Route> parse(String routesJSONString) throws Exception {
+//        try {
+//            List<Route> routeList = new ArrayList<Route>();
+//            final JSONObject jSONObject = new JSONObject(routesJSONString);
+//            JSONArray routeJSONArray = jSONObject.getJSONArray(ROUTES);
+//            Route route;
+//            JSONObject routesJSONObject;
+//            for (int m = 0; m < routeJSONArray.length(); m++) {
+//                route = new Route(context);
+//                routesJSONObject = routeJSONArray.getJSONObject(m);
+//                JSONArray legsJSONArray;
+//                route.setSummary(routesJSONObject.getString(SUMMARY));
+//                legsJSONArray = routesJSONObject.getJSONArray(LEGS);
+//                JSONObject legJSONObject;
+//                Leg leg;
+//                JSONArray stepsJSONArray;
+//                for (int b = 0; b < legsJSONArray.length(); b++) {
+//                    leg = new Leg();
+//                    legJSONObject = legsJSONArray.getJSONObject(b);
+//                    leg.setDistance(new Distance(legJSONObject.optJSONObject(DISTANCE).optString(TEXT), legJSONObject.optJSONObject(DISTANCE).optLong(VALUE)));
+//                    leg.setDuration(new Duration(legJSONObject.optJSONObject(DURATION).optString(TEXT), legJSONObject.optJSONObject(DURATION).optLong(VALUE)));
+//                    stepsJSONArray = legJSONObject.getJSONArray(STEPS);
+//                    JSONObject stepJSONObject, stepDurationJSONObject, legPolyLineJSONObject, stepStartLocationJSONObject, stepEndLocationJSONObject;
+//                    Step step;
+//                    String encodedString;
+//                    LatLng stepStartLocationLatLng, stepEndLocationLatLng;
+//                    for (int i = 0; i < stepsJSONArray.length(); i++) {
+//                        stepJSONObject = stepsJSONArray.getJSONObject(i);
+//                        step = new Step();
+//                        JSONObject stepDistanceJSONObject = stepJSONObject.getJSONObject(DISTANCE);
+//                        step.setDistance(new Distance(stepDistanceJSONObject.getString(TEXT), stepDistanceJSONObject.getLong(VALUE)));
+//                        stepDurationJSONObject = stepJSONObject.getJSONObject(DURATION);
+//                        step.setDuration(new Duration(stepDurationJSONObject.getString(TEXT), stepDurationJSONObject.getLong(VALUE)));
+//                        stepEndLocationJSONObject = stepJSONObject.getJSONObject(END_LOCATION);
+//                        stepEndLocationLatLng = new LatLng(stepEndLocationJSONObject.getDouble(LATITUDE), stepEndLocationJSONObject.getDouble(LONGITUDE));
+//                        step.setEndLocation(stepEndLocationLatLng);
+//                        step.setHtmlInstructions(stepJSONObject.getString(HTML_INSTRUCTION));
+//                        legPolyLineJSONObject = stepJSONObject.getJSONObject(POLYLINE);
+//                        encodedString = legPolyLineJSONObject.getString(POINTS);
+//                        step.setPoints(decodePolyLines(encodedString));
+//                        stepStartLocationJSONObject = stepJSONObject.getJSONObject(START_LOCATION);
+//                        stepStartLocationLatLng = new LatLng(stepStartLocationJSONObject.getDouble(LATITUDE), stepStartLocationJSONObject.getDouble(LONGITUDE));
+//                        step.setStartLocation(stepStartLocationLatLng);
+//                        leg.addStep(step);
+//                    }
+//                    route.addLeg(leg);
+//                }
+//                routeList.add(route);
+//            }
+//            return routeList;
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 }
