@@ -15,6 +15,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
+import com.comp4020.tripcast.IconAdder;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -115,7 +118,7 @@ public class MapsActivity extends FragmentActivity {
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
         }
 
-        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(latLng, 14.0f) );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("Current Location"));
