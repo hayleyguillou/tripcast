@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -150,7 +151,9 @@ public class MapsActivity extends FragmentActivity {
 
                 Log.i("origin", origin);
                 Log.i("destination", destination);
-
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(destinationField.getWindowToken(), 0);
             }
         });
     }
