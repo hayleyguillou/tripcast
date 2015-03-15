@@ -20,14 +20,46 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
     />
     </FrameLayout>
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_gravity="start"
+        android:orientation="vertical"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#111"
-    />
+        android:background="#fff"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip Origin:"
+        />
+        <EditText
+            android:id="@+id/route_input1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:lines="2"
+        />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip Destination:"
+        />
+        <EditText
+            android:id="@+id/route_input2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+        />
+        <Button
+            android:id="@+id/trip_set_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cool trip bro"
+            android:onClick="tripSetButtonClicked"
+        />
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

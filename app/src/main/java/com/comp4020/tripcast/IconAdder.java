@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class IconAdder {
 
+    //currently takes "Rain", "Sun", "Snow", and "Tornado" as possible weather states
     public static void addIcon(String iconType, GoogleMap mMap, LatLng position) {
         MarkerOptions markOps = new MarkerOptions()
                 .position(position)

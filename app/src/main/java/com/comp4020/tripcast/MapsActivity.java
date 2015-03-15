@@ -1,14 +1,19 @@
 package com.comp4020.tripcast;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,7 +28,7 @@ public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private DrawerLayout mDrawerLayout;
-    private FrameLayout mLeftDrawer;
+    private LinearLayout mLeftDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +37,11 @@ public class MapsActivity extends FragmentActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mLeftDrawer = (FrameLayout) findViewById(R.id.left_drawer);
+        mLeftDrawer = (LinearLayout) findViewById(R.id.left_drawer);
 
         setUpMapIfNeeded();
         setUpLocation();
-
+        setUpTripSetWindow();
 
         /*hideAlphaPane();
         View omegaPane = findViewById(R.id.drawer_layout);
@@ -122,6 +127,25 @@ public class MapsActivity extends FragmentActivity {
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("Current Location"));
+    }
+
+    private void setUpTripSetWindow() {
+        Button tripSetButton = (Button)findViewById(R.id.trip_set_button);
+        tripSetButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                String origin;
+                String destination;
+                EditText originField = (EditText)findViewById(R.id.route_input1);
+                EditText destinationField = (EditText)findViewById(R.id.route_input2);
+
+                origin = originField.getText().toString();
+                destination = destinationField.getText().toString();
+
+                Log.i("origin", origin);
+                Log.i("destination", destination);
+
+            }
+        });
     }
 
     private void hideAlphaPane() {
