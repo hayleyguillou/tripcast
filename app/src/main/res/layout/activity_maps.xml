@@ -17,9 +17,52 @@
         android:layout_height="match_parent"
         android:id="@+id/map"
         tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-    />
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
     </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <Button
+            android:id="@+id/route_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Route"
+            android:visibility="invisible"
+        />
+        <Button
+            android:id="@+id/route1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/route_button"
+            android:text="Red"
+            android:visibility="invisible"
+        />
+        <Button
+            android:id="@+id/route2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/route1"
+            android:text="Blue"
+            android:visibility="invisible"
+            />
+        <Button
+            android:id="@+id/route3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/route2"
+            android:text="Green"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/pin"
+            android:clickable="true"
+            />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="match_parent"
@@ -58,8 +101,7 @@
             android:id="@+id/trip_set_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cool trip bro"
-            android:onClick="tripSetButtonClicked"
+            android:text="Set Trip"
         />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

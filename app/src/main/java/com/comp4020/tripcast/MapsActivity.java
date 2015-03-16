@@ -16,6 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Button;
 import android.graphics.Color;
+import android.view.*;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,8 +50,8 @@ public class MapsActivity extends FragmentActivity {
 
         setUpMapIfNeeded();
         setUpLocation();
+        setUpMenuBar();
         setUpTripSetWindow();
-        testDrawLine();
 
         /*hideAlphaPane();
         View omegaPane = findViewById(R.id.drawer_layout);
@@ -79,6 +81,13 @@ public class MapsActivity extends FragmentActivity {
         super.onResume();
         setUpMapIfNeeded();
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }*/
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -126,7 +135,7 @@ public class MapsActivity extends FragmentActivity {
 
         LatLng latLng;
         if(location == null) {
-            latLng = new LatLng(49.8573,-97.1373);
+            latLng = new LatLng(47.6097,-122.3331);
         } else {
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
         }
@@ -135,6 +144,11 @@ public class MapsActivity extends FragmentActivity {
         mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("Current Location"));
+    }
+
+    private void setUpMenuBar(){
+        RelativeLayout rl = (RelativeLayout)findViewById(R.id.menu_bar);
+        //rl.setBackgroundColor(Color.WHITE);
     }
 
     private void setUpTripSetWindow() {
@@ -154,16 +168,50 @@ public class MapsActivity extends FragmentActivity {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);
                 imm.hideSoftInputFromWindow(destinationField.getWindowToken(), 0);
+
+                //make the route selection button visible
+                Button routeButt = (Button)findViewById(R.id.route_button);
+                routeButt.setVisibility(View.VISIBLE);
+                routeButt.setBackgroundColor(Color.BLACK);
+                routeButt.setTextColor(Color.WHITE);
+                routeButt.setOnClickListener(new Button.OnClickListener(){
+                    public void onClick(View v) {
+                        Button route1 = (Button)findViewById(R.id.route1);
+                        Button route2 = (Button)findViewById(R.id.route2);
+                        Button route3 = (Button)findViewById(R.id.route3);
+
+                        route1.setVisibility(View.VISIBLE);
+                        route1.setBackgroundColor(Color.RED);
+                        route2.setVisibility(View.VISIBLE);
+                        route2.setBackgroundColor(Color.BLUE);
+                        route3.setVisibility(View.VISIBLE);
+                        route3.setBackgroundColor(Color.GREEN);
+                    }
+                });
+
+                //route1
+                seattleToStLouis();
+
+                //route2
+                seattleToMinneapolis();
+                minneapolisToStLouis();
+
+                //route3
+                seattleToLasVegas();
+                lasVegasToStLouis();
+
+                displayWeatherOrigDest();
+                displayWeatherRoute1();
+                displayWeatherRoute2();
+                displayWeatherRoute3();
             }
         });
     }
 
-    //I know this is kind of weird but here's how to draw routes on the map!
-    //you just need a start and end dest, google figures out the route from there
-    private void testDrawLine() {
+    private void seattleToStLouis() {
         GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(40.8573,-97.1373);
-        LatLng dest = new LatLng(49.8773,-97.1373);
+        LatLng orig = new LatLng(47.6097,-122.3331);
+        LatLng dest = new LatLng(38.6272,-90.1978);
         Document doc = null;
 
         try {
@@ -186,6 +234,144 @@ public class MapsActivity extends FragmentActivity {
 
             mMap.addPolyline(rectLine);
         }
+    }
+
+    private void seattleToMinneapolis() {
+        GMapV2Direction directions = new GMapV2Direction();
+        LatLng orig = new LatLng(47.6097,-122.3331);
+        LatLng dest = new LatLng(44.9778,-93.2650); //detour through minneapolis
+        Document doc = null;
+
+        try {
+            doc = directions.execute(orig, dest).get();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (doc != null) {
+            ArrayList<LatLng> directionPts = directions.getDirection(doc);
+
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.BLUE);
+
+            for (int i = 0; i < directionPts.size(); i++) {
+                rectLine.add(directionPts.get(i));
+            }
+
+
+            mMap.addPolyline(rectLine);
+        }
+    }
+
+    private void minneapolisToStLouis() {
+        GMapV2Direction directions = new GMapV2Direction();
+        LatLng orig = new LatLng(44.9778,-93.2650);
+        LatLng dest = new LatLng(38.6272,-90.1978);
+        Document doc = null;
+
+        try {
+            doc = directions.execute(orig, dest).get();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (doc != null) {
+            ArrayList<LatLng> directionPts = directions.getDirection(doc);
+
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.BLUE);
+
+            for (int i = 0; i < directionPts.size(); i++) {
+                rectLine.add(directionPts.get(i));
+            }
+
+
+            mMap.addPolyline(rectLine);
+        }
+    }
+
+    private void seattleToLasVegas() {
+        GMapV2Direction directions = new GMapV2Direction();
+        LatLng orig = new LatLng(47.6097,-122.3331);
+        LatLng dest = new LatLng(36.1215,-115.1739); //detour through minneapolis
+        Document doc = null;
+
+        try {
+            doc = directions.execute(orig, dest).get();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (doc != null) {
+            ArrayList<LatLng> directionPts = directions.getDirection(doc);
+
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.GREEN);
+
+            for (int i = 0; i < directionPts.size(); i++) {
+                rectLine.add(directionPts.get(i));
+            }
+
+
+            mMap.addPolyline(rectLine);
+        }
+    }
+
+    private void lasVegasToStLouis() {
+        GMapV2Direction directions = new GMapV2Direction();
+        LatLng orig = new LatLng(36.1215,-115.1739);
+        LatLng dest = new LatLng(38.6272,-90.1978);
+        Document doc = null;
+
+        try {
+            doc = directions.execute(orig, dest).get();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (doc != null) {
+            ArrayList<LatLng> directionPts = directions.getDirection(doc);
+
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.GREEN);
+
+            for (int i = 0; i < directionPts.size(); i++) {
+                rectLine.add(directionPts.get(i));
+            }
+
+
+            mMap.addPolyline(rectLine);
+        }
+    }
+
+    private void displayWeatherOrigDest(){
+        LatLng seattle = new LatLng(47.6097,-122.3331);
+        LatLng stLouis = new LatLng(38.6272, -90.1978);
+
+        IconAdder.addIcon("Rain", mMap, seattle);
+        IconAdder.addIcon("Rain", mMap, stLouis);
+    }
+
+    private void displayWeatherRoute1(){
+        LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
+
+        IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+    }
+
+    private void displayWeatherRoute2(){
+        LatLng minneapolis = new LatLng(44.9778, -93.2650);
+
+        IconAdder.addIcon("Snow", mMap, minneapolis);
+    }
+
+    private void displayWeatherRoute3(){
+        LatLng vegas = new LatLng(36.1215, -115.1739);
+
+        IconAdder.addIcon("Sun", mMap, vegas);
     }
 
     private void hideAlphaPane() {
