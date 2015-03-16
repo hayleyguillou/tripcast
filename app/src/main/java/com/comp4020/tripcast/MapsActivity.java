@@ -82,13 +82,6 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }*/
-
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -186,9 +179,42 @@ public class MapsActivity extends FragmentActivity {
                         route2.setBackgroundColor(Color.BLUE);
                         route3.setVisibility(View.VISIBLE);
                         route3.setBackgroundColor(Color.GREEN);
+
+                        route1.setOnClickListener(new Button.OnClickListener(){
+                            public void onClick(View v) {
+                                //clear the map and display route 1 info
+                                mMap.clear();
+                                seattleToStLouis();
+                                displayWeatherOrigDest();
+                                displayWeatherRoute1();
+                            }
+                        });
+
+                        route2.setOnClickListener(new Button.OnClickListener(){
+                            public void onClick(View v) {
+                                //clear the map and display route 1 info
+                                mMap.clear();
+                                seattleToMinneapolis();
+                                minneapolisToStLouis();
+                                displayWeatherOrigDest();
+                                displayWeatherRoute2();
+                            }
+                        });
+
+                        route3.setOnClickListener(new Button.OnClickListener(){
+                            public void onClick(View v) {
+                                //clear the map and display route 1 info
+                                mMap.clear();
+                                seattleToLasVegas();
+                                lasVegasToStLouis();
+                                displayWeatherOrigDest();
+                                displayWeatherRoute3();
+                            }
+                        });
                     }
                 });
 
+                //display all route info
                 //route1
                 seattleToStLouis();
 

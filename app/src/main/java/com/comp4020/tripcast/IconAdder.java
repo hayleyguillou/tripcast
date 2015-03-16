@@ -14,6 +14,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 public class IconAdder {
 
     //currently takes "Rain", "Sun", "Snow", and "Tornado" as possible weather states
@@ -40,5 +42,6 @@ public class IconAdder {
         }
 
         mMap.addMarker(markOps);
+
     }
 }
