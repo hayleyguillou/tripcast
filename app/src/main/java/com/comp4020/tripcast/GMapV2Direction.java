@@ -66,7 +66,7 @@ public class GMapV2Direction extends AsyncTask<LatLng, Void, Document>{
     }
 
     protected void onPostExecute(Document doc) {
-        Log.i("hi", "hi");
+
     }
 
     public String getDurationText(Document doc) {

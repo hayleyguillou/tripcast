@@ -10,14 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <fragment
-        xmlns:tools="http://schemas.android.com/tools"
+        <fragment
+            xmlns:tools="http://schemas.android.com/tools"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" >
+            <SeekBar
+                android:id="@+id/trip_pos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="800dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:visibility="invisible"/>
+        </fragment>
     </FrameLayout>
     <RelativeLayout
         android:id="@+id/menu_bar"
@@ -104,4 +113,5 @@
             android:text="Set Trip"
         />
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
