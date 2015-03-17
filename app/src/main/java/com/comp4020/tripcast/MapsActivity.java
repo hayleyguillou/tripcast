@@ -210,10 +210,18 @@ public class MapsActivity extends FragmentActivity {
                         route3.setVisibility(View.VISIBLE);
                         route3.setBackgroundColor(Color.GREEN);
 
+                        //find id of additional information
+                        final LinearLayout route1Info = (LinearLayout)findViewById(R.id.route1_info_text);
+                        final LinearLayout route2Info = (LinearLayout)findViewById(R.id.route2_info_text);
+                        final LinearLayout route3Info = (LinearLayout)findViewById(R.id.route3_info_text);
+
                         route1.setOnClickListener(new Button.OnClickListener(){
                             public void onClick(View v) {
                                 currRoute = 1;
                                 displayWeather(0);
+                                route2Info.setVisibility(View.INVISIBLE);
+                                route3Info.setVisibility(View.INVISIBLE);
+                                route1Info.setVisibility(View.VISIBLE);
                             }
                         });
 
@@ -221,6 +229,9 @@ public class MapsActivity extends FragmentActivity {
                             public void onClick(View v) {
                                 currRoute = 2;
                                 displayWeather(0);
+                                route1Info.setVisibility(View.INVISIBLE);
+                                route3Info.setVisibility(View.INVISIBLE);
+                                route2Info.setVisibility(View.VISIBLE);
                             }
                         });
 
@@ -228,6 +239,9 @@ public class MapsActivity extends FragmentActivity {
                             public void onClick(View v) {
                                 currRoute = 3;
                                 displayWeather(0);
+                                route1Info.setVisibility(View.INVISIBLE);
+                                route2Info.setVisibility(View.INVISIBLE);
+                                route3Info.setVisibility(View.VISIBLE);
                             }
                         });
                     }
