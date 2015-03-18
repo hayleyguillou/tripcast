@@ -88,10 +88,13 @@
             android:layout_weight="1"
             android:background="@android:color/white">
             <TextView
+                android:id="@+id/route1_info_textview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Route 1:"
+                android:maxLines="10"
+                android:scrollbars="vertical"
             />
             </LinearLayout>
         </LinearLayout>
@@ -111,10 +114,13 @@
             android:layout_weight="1"
             android:background="@android:color/white">
             <TextView
+                android:id="@+id/route2_info_textview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Route 2:"
+                android:maxLines="10"
+                android:scrollbars="vertical"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -134,10 +140,13 @@
             android:layout_weight="1"
             android:background="@android:color/white">
             <TextView
+                android:id="@+id/route3_info_textview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Route 3:"
+                android:maxLines="10"
+                android:scrollbars="vertical"
                 />
         </LinearLayout>
     </LinearLayout>

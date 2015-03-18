@@ -1,36 +1,34 @@
 package com.comp4020.tripcast;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Button;
-import android.graphics.Color;
-import android.view.*;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.*;
-
-import com.comp4020.tripcast.IconAdder;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
@@ -249,6 +247,11 @@ public class MapsActivity extends FragmentActivity {
 
                 currRoute = 0;
                 displayWeather(0); //display weather for all routes, at progress 0
+
+                //Set textview scrollbars
+                ((TextView)findViewById(R.id.route1_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView)findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView)findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
             }
         });
     }
@@ -419,6 +422,9 @@ public class MapsActivity extends FragmentActivity {
 
 
             mMap.addPolyline(rectLine);
+
+            NodeList nl = doc.getElementsByTagName("html_instructions");
+            addWrittenDirections(nl, R.id.route1_info_textview);
         }
     }
 
@@ -447,6 +453,9 @@ public class MapsActivity extends FragmentActivity {
 
 
             mMap.addPolyline(rectLine);
+
+            NodeList nl = doc.getElementsByTagName("html_instructions");
+            addWrittenDirections(nl, R.id.route2_info_textview);
         }
     }
 
@@ -475,6 +484,9 @@ public class MapsActivity extends FragmentActivity {
 
 
             mMap.addPolyline(rectLine);
+
+            NodeList nl = doc.getElementsByTagName("html_instructions");
+            addWrittenDirections(nl, R.id.route2_info_textview);
         }
     }
 
@@ -503,6 +515,9 @@ public class MapsActivity extends FragmentActivity {
 
 
             mMap.addPolyline(rectLine);
+
+            NodeList nl = doc.getElementsByTagName("html_instructions");
+            addWrittenDirections(nl, R.id.route3_info_textview);
         }
     }
 
@@ -528,9 +543,20 @@ public class MapsActivity extends FragmentActivity {
             for (int i = 0; i < directionPts.size(); i++) {
                 rectLine.add(directionPts.get(i));
             }
-
-
             mMap.addPolyline(rectLine);
+
+            NodeList nl = doc.getElementsByTagName("html_instructions");
+            addWrittenDirections(nl, R.id.route3_info_textview);
+        }
+    }
+
+    private void addWrittenDirections(NodeList instructions, int id) {
+        TextView routeInfo = (TextView)findViewById(id);
+
+        for(int i = 0; i < instructions.getLength(); i++) {
+            routeInfo.append(
+                    Html.fromHtml(instructions.item(i).getTextContent() + "\n")
+            );
         }
     }
 

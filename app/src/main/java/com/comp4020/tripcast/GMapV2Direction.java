@@ -1,13 +1,9 @@
 package com.comp4020.tripcast;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,17 +11,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.google.android.gms.maps.model.LatLng;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-import android.content.Context;
-import android.util.Log;
-import android.os.AsyncTask;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /*I found this code at http://stackoverflow.com/questions/14444228/
 android-how-to-draw-route-directions-google-maps-api-v2-from-current-location-t
@@ -55,9 +51,11 @@ public class GMapV2Direction extends AsyncTask<LatLng, Void, Document>{
             HttpPost httpPost = new HttpPost(url);
             HttpResponse response = httpClient.execute(httpPost, localContext);
             InputStream in = response.getEntity().getContent();
+
             DocumentBuilder builder = DocumentBuilderFactory.newInstance()
                     .newDocumentBuilder();
             Document doc = builder.parse(in);
+
             return doc;
         } catch (Exception e) {
             e.printStackTrace();
@@ -268,20 +266,25 @@ public class GMapV2Direction extends AsyncTask<LatLng, Void, Document>{
             final BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             final StringBuffer sBuf = new StringBuffer();
             String line = null;
+            boolean start = true;
             while ((line = reader.readLine()) != null) {
-                sBuf.append(line);
+                if(start)
+                    start = false;
+                else
+                    sBuf.append(line);
             }
             return sBuf.toString();
         } catch (Exception e) {
             throw e;
         } finally {
             try {
-                input.close();
+                //input.close();
             } catch (Exception e) {
                 throw e;
             }
         }
     }
+
 
 //    public List<Route> parse(String routesJSONString) throws Exception {
 //        try {
