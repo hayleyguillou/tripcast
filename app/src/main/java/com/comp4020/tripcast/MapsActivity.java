@@ -64,13 +64,11 @@ public class MapsActivity extends FragmentActivity {
                 showAlphaPane();
                 super.onSwipeLeft();
             }
-
             @Override
             public void onSwipeRight(){
                 hideAlphaPane();
                 super.onSwipeRight();
             }
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //hideAlphaPane();
@@ -209,9 +207,9 @@ public class MapsActivity extends FragmentActivity {
                         route3.setBackgroundColor(Color.GREEN);
 
                         //find id of additional information
-                        final LinearLayout route1Info = (LinearLayout)findViewById(R.id.route1_info_text);
-                        final LinearLayout route2Info = (LinearLayout)findViewById(R.id.route2_info_text);
-                        final LinearLayout route3Info = (LinearLayout)findViewById(R.id.route3_info_text);
+                        final LinearLayout route1Info = (LinearLayout)findViewById(R.id.route_info_text);
+                        final LinearLayout route2Info = (LinearLayout)findViewById(R.id.route_info_text);
+                        final LinearLayout route3Info = (LinearLayout)findViewById(R.id.route_info_text);
 
                         route1.setOnClickListener(new Button.OnClickListener(){
                             public void onClick(View v) {
@@ -249,7 +247,7 @@ public class MapsActivity extends FragmentActivity {
                 displayWeather(0); //display weather for all routes, at progress 0
 
                 //Set textview scrollbars
-                ((TextView)findViewById(R.id.route1_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView)findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());
                 ((TextView)findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
                 ((TextView)findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
             }
@@ -424,7 +422,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route1_info_textview);
+            addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -455,7 +453,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route2_info_textview);
+            addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -486,7 +484,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route2_info_textview);
+            addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -517,7 +515,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route3_info_textview);
+            addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -546,7 +544,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route3_info_textview);
+            addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
