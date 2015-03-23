@@ -148,23 +148,23 @@ public class MapsActivity extends FragmentActivity {
 
 
     private void setUpTripSetWindow() {
-        Button tripSetButton = (Button)findViewById(R.id.trip_set_button);
+        Button tripSetButton = (Button) findViewById(R.id.trip_set_button);
         tripSetButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 String origin;
                 String destination;
-                EditText originField = (EditText)findViewById(R.id.route_input1);
-                EditText destinationField = (EditText)findViewById(R.id.route_input2);
+                EditText originField = (EditText) findViewById(R.id.route_input1);
+                EditText destinationField = (EditText) findViewById(R.id.route_input2);
 
                 origin = originField.getText().toString();
                 destination = destinationField.getText().toString();
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);
                 imm.hideSoftInputFromWindow(destinationField.getWindowToken(), 0);
 
                 //make the trip position slider visible
-                SeekBar tripPos = (SeekBar)findViewById(R.id.trip_pos);
+                SeekBar tripPos = (SeekBar) findViewById(R.id.trip_pos);
                 tripPos.setVisibility(View.VISIBLE);
 
                 tripPos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -183,21 +183,21 @@ public class MapsActivity extends FragmentActivity {
                         int progress = seekBar.getProgress();
 
                         //display the weather for the appropriate trip position and route
-                        displayWeather(progress);
+                        Route1.displayWeather(mMap, currRoute, progress);
                     }
                 });
 
                 //make the route selection button visible
-                Button routeButt = (Button)findViewById(R.id.route_button);
+                Button routeButt = (Button) findViewById(R.id.route_button);
                 routeButt.setVisibility(View.VISIBLE);
                 routeButt.setBackgroundColor(Color.BLACK);
                 routeButt.setTextColor(Color.WHITE);
 
-                routeButt.setOnClickListener(new Button.OnClickListener(){
+                routeButt.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Button route1 = (Button)findViewById(R.id.route1);
-                        Button route2 = (Button)findViewById(R.id.route2);
-                        Button route3 = (Button)findViewById(R.id.route3);
+                        Button route1 = (Button) findViewById(R.id.route1);
+                        Button route2 = (Button) findViewById(R.id.route2);
+                        Button route3 = (Button) findViewById(R.id.route3);
 
                         route1.setVisibility(View.VISIBLE);
                         route1.setBackgroundColor(Color.RED);
@@ -207,34 +207,34 @@ public class MapsActivity extends FragmentActivity {
                         route3.setBackgroundColor(Color.GREEN);
 
                         //find id of additional information
-                        final LinearLayout route1Info = (LinearLayout)findViewById(R.id.route_info_text);
-                        final LinearLayout route2Info = (LinearLayout)findViewById(R.id.route_info_text);
-                        final LinearLayout route3Info = (LinearLayout)findViewById(R.id.route_info_text);
+                        final LinearLayout route1Info = (LinearLayout) findViewById(R.id.route_info_text);
+                        final LinearLayout route2Info = (LinearLayout) findViewById(R.id.route_info_text);
+                        final LinearLayout route3Info = (LinearLayout) findViewById(R.id.route_info_text);
 
-                        route1.setOnClickListener(new Button.OnClickListener(){
+                        route1.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 1;
-                                displayWeather(0);
+                                Route1.displayWeather(mMap, currRoute, 0);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route1Info.setVisibility(View.VISIBLE);
                             }
                         });
 
-                        route2.setOnClickListener(new Button.OnClickListener(){
+                        route2.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 2;
-                                displayWeather(0);
+                                Route1.displayWeather(mMap, currRoute, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.VISIBLE);
                             }
                         });
 
-                        route3.setOnClickListener(new Button.OnClickListener(){
+                        route3.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 3;
-                                displayWeather(0);
+                                Route1.displayWeather(mMap, currRoute, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.VISIBLE);
@@ -244,318 +244,14 @@ public class MapsActivity extends FragmentActivity {
                 });
 
                 currRoute = 0;
-                displayWeather(0); //display weather for all routes, at progress 0
+                Route1.displayWeather(mMap, currRoute, 0); //display weather for all routes, at progress 0
 
                 //Set textview scrollbars
-                ((TextView)findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());
-                ((TextView)findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
-                ((TextView)findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView) findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView) findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                ((TextView) findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
             }
         });
-    }
-
-    private void displayWeather(int progress){
-
-        LatLng seattle = new LatLng(47.6097,-122.3331);
-
-        LatLng missoula = new LatLng(46.8625, -114.0117);
-        LatLng minneapolis = new LatLng(44.9778,-93.2650);
-
-        LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
-        LatLng northPlatte = new LatLng(41.1359, -100.7705);
-
-        LatLng lasVegas = new LatLng(36.1215,-115.1739);
-        LatLng denver = new LatLng(39.7392, -104.9903);
-
-        LatLng stLouis = new LatLng(38.6272,-90.1978);
-
-        mMap.clear(); //clear the screen
-
-        String route = currRoute + "";
-        Log.i("route", route);
-
-        //update the weather seen
-        if (progress < 25) {
-            //display weather at 0% into the trip
-            switch (currRoute) {
-                case 1: //no detour
-                    seattleToStLouis();
-                    break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-                default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-            }
-
-            //only need seattle weather at first
-            IconAdder.addIcon("Rain", mMap, seattle);
-        }
-        else if (progress >= 25 && progress < 50) {
-
-            //display the weather at 25% into the trip, depending on which route has been chosen
-            switch (currRoute) {
-                case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-
-                    seattleToStLouis();
-                    break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Sun", mMap, missoula);
-
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
-
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-                default: //all routes
-                    IconAdder.addIcon("Sun", mMap, missoula);
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
-
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-            }
-        }
-        else if (progress >= 50 && progress < 75) {
-            //display the weather at 50% into the trip, depending on which route has been chosen
-            switch (currRoute) {
-                case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
-
-                    seattleToStLouis();
-                    break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
-
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Snow", mMap, denver);
-
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-                default: //all routes
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
-                    IconAdder.addIcon("Snow", mMap, denver);
-
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-            }
-        }
-        else {
-            //display the weather at 100% into the trip (St louis)
-            switch (currRoute) {
-                case 1: //no detour
-                    seattleToStLouis();
-                    break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-                default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
-                    break;
-            }
-
-            IconAdder.addIcon("Sun", mMap, stLouis);
-        }
-    }
-
-    private void seattleToStLouis() {
-        GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(47.6097,-122.3331);
-        LatLng dest = new LatLng(38.6272,-90.1978);
-        Document doc = null;
-
-        try {
-            doc = directions.execute(orig, dest).get();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (doc != null) {
-            ArrayList<LatLng> directionPts = directions.getDirection(doc);
-
-            PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                    Color.RED);
-
-            for (int i = 0; i < directionPts.size(); i++) {
-                rectLine.add(directionPts.get(i));
-            }
-
-
-            mMap.addPolyline(rectLine);
-
-            NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
-        }
-    }
-
-    private void seattleToMinneapolis() {
-        GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(47.6097,-122.3331);
-        LatLng dest = new LatLng(44.9778,-93.2650); //detour through minneapolis
-        Document doc = null;
-
-        try {
-            doc = directions.execute(orig, dest).get();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (doc != null) {
-            ArrayList<LatLng> directionPts = directions.getDirection(doc);
-
-            PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                    Color.BLUE);
-
-            for (int i = 0; i < directionPts.size(); i++) {
-                rectLine.add(directionPts.get(i));
-            }
-
-
-            mMap.addPolyline(rectLine);
-
-            NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
-        }
-    }
-
-    private void minneapolisToStLouis() {
-        GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(44.9778,-93.2650);
-        LatLng dest = new LatLng(38.6272,-90.1978);
-        Document doc = null;
-
-        try {
-            doc = directions.execute(orig, dest).get();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (doc != null) {
-            ArrayList<LatLng> directionPts = directions.getDirection(doc);
-
-            PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                    Color.BLUE);
-
-            for (int i = 0; i < directionPts.size(); i++) {
-                rectLine.add(directionPts.get(i));
-            }
-
-
-            mMap.addPolyline(rectLine);
-
-            NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
-        }
-    }
-
-    private void seattleToLasVegas() {
-        GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(47.6097,-122.3331);
-        LatLng dest = new LatLng(36.1215,-115.1739);
-        Document doc = null;
-
-        try {
-            doc = directions.execute(orig, dest).get();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (doc != null) {
-            ArrayList<LatLng> directionPts = directions.getDirection(doc);
-
-            PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                    Color.GREEN);
-
-            for (int i = 0; i < directionPts.size(); i++) {
-                rectLine.add(directionPts.get(i));
-            }
-
-
-            mMap.addPolyline(rectLine);
-
-            NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
-        }
-    }
-
-    private void lasVegasToStLouis() {
-        GMapV2Direction directions = new GMapV2Direction();
-        LatLng orig = new LatLng(36.1215,-115.1739);
-        LatLng dest = new LatLng(38.6272,-90.1978);
-        Document doc = null;
-
-        try {
-            doc = directions.execute(orig, dest).get();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (doc != null) {
-            ArrayList<LatLng> directionPts = directions.getDirection(doc);
-
-            PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                    Color.GREEN);
-
-            for (int i = 0; i < directionPts.size(); i++) {
-                rectLine.add(directionPts.get(i));
-            }
-            mMap.addPolyline(rectLine);
-
-            NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
-        }
-    }
-
-    private void addWrittenDirections(NodeList instructions, int id) {
-        TextView routeInfo = (TextView)findViewById(id);
-
-        for(int i = 0; i < instructions.getLength(); i++) {
-            routeInfo.append(
-                    Html.fromHtml(instructions.item(i).getTextContent() + "\n")
-            );
-        }
     }
 
     private void hideAlphaPane() {
