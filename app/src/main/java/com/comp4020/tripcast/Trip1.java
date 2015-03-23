@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by brianyeo on 2015-03-23.
  */
-public class Route1 {
+public class Trip1 {
     static GoogleMap mMap;
     static int currRoute;
 

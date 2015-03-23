@@ -183,7 +183,7 @@ public class MapsActivity extends FragmentActivity {
                         int progress = seekBar.getProgress();
 
                         //display the weather for the appropriate trip position and route
-                        Route1.displayWeather(mMap, currRoute, progress);
+                        Trip1.displayWeather(mMap, currRoute, progress);
                     }
                 });
 
@@ -214,7 +214,7 @@ public class MapsActivity extends FragmentActivity {
                         route1.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 1;
-                                Route1.displayWeather(mMap, currRoute, 0);
+                                Trip1.displayWeather(mMap, currRoute, 0);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route1Info.setVisibility(View.VISIBLE);
@@ -224,7 +224,7 @@ public class MapsActivity extends FragmentActivity {
                         route2.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 2;
-                                Route1.displayWeather(mMap, currRoute, 0);
+                                Trip1.displayWeather(mMap, currRoute, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.VISIBLE);
@@ -234,7 +234,7 @@ public class MapsActivity extends FragmentActivity {
                         route3.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 3;
-                                Route1.displayWeather(mMap, currRoute, 0);
+                                Trip1.displayWeather(mMap, currRoute, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.VISIBLE);
@@ -244,7 +244,7 @@ public class MapsActivity extends FragmentActivity {
                 });
 
                 currRoute = 0;
-                Route1.displayWeather(mMap, currRoute, 0); //display weather for all routes, at progress 0
+                Trip1.displayWeather(mMap, currRoute, 0); //display weather for all routes, at progress 0
 
                 //Set textview scrollbars
                 ((TextView) findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());
