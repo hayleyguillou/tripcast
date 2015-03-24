@@ -2,6 +2,7 @@ package com.comp4020.tripcast;
 
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -34,7 +35,7 @@ public class Trip2 {
 
     static LatLng greenBay = new LatLng(44.5133, -88.0158);
 
-    public static void displayWeather(GoogleMap map, int theRoute, int progress) {
+    public static void displayWeather(GoogleMap map, int theRoute, TextView routeInfo, int progress) {
         mMap = map;
         currRoute = theRoute;
 

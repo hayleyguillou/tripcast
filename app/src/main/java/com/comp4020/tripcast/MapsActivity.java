@@ -40,11 +40,13 @@ public class MapsActivity extends FragmentActivity {
     private SeekBar tripPos;
     private int currRoute; //0 for all routes, 1-3 for specific routes
     int tripNum = 0;
+    TextView routeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        routeInfo = (TextView) findViewById(R.id.route_info_textview);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -192,7 +194,7 @@ public class MapsActivity extends FragmentActivity {
                         int progress = seekBar.getProgress();
 
                         //display the weather for the appropriate trip position and route
-                        Trip.newTrip(tripNum, mMap, currRoute, progress);
+                        Trip.newTrip(tripNum, mMap, currRoute, routeInfo, progress);
                     }
                 });
 
@@ -223,7 +225,7 @@ public class MapsActivity extends FragmentActivity {
                         route1.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 1;
-                                Trip.newTrip(tripNum, mMap, currRoute, 0);
+                                Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route1Info.setVisibility(View.VISIBLE);
@@ -233,7 +235,7 @@ public class MapsActivity extends FragmentActivity {
                         route2.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 2;
-                                Trip.newTrip(tripNum, mMap, currRoute, 0);
+                                Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.VISIBLE);
@@ -243,7 +245,7 @@ public class MapsActivity extends FragmentActivity {
                         route3.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 3;
-                                Trip.newTrip(tripNum, mMap, currRoute, 0);
+                                Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.VISIBLE);
@@ -253,7 +255,7 @@ public class MapsActivity extends FragmentActivity {
                 });
 
                 currRoute = 0;
-                Trip.newTrip(tripNum, mMap, currRoute, 0); //display weather for all routes, at progress 0
+                Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0); //display weather for all routes, at progress 0
 
                 //Set textview scrollbars
                 ((TextView) findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());

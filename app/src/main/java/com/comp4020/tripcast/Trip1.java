@@ -39,7 +39,7 @@ public class Trip1 {
 
     static LatLng stLouis = new LatLng(38.6272, -90.1978);
 
-    public static void displayWeather1(GoogleMap map, int theRoute, int progress) {
+    public static void displayWeather1(GoogleMap map, int theRoute, TextView routeInfo, int progress) {
         mMap = map;
         currRoute = theRoute;
 
@@ -74,23 +74,28 @@ public class Trip1 {
 
             //only need seattle weather at first
             IconAdder.addIcon("Rain", mMap, seattle);
+            routeInfo.setText("Seattle rainfall: 25mm");
+
         } else if (progress >= 25 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
                     IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                    routeInfo.setText("Salt Lake City rainfall: 0mm");
 
                     seattleToStLouis();
                     break;
                 case 2: //detour through minneapolis
                     IconAdder.addIcon("Sun", mMap, missoula);
+                    routeInfo.setText("Missoula rainfall: 10mm");
 
                     seattleToMinneapolis();
                     minneapolisToStLouis();
                     break;
                 case 3: //detour through Las Vegas
                     IconAdder.addIcon("Sun", mMap, lasVegas);
+                    routeInfo.setText("Las Vegas rainfall: 0mm");
 
                     seattleToLasVegas();
                     lasVegasToStLouis();
