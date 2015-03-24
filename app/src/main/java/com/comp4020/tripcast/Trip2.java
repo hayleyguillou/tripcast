@@ -1,12 +1,7 @@
 package com.comp4020.tripcast;
 
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.util.Log;
-import android.widget.TextView;
-import android.app.Activity;
-import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,25 +16,25 @@ import java.util.ArrayList;
  * Created by brianyeo on 2015-03-23.
  */
 
-//Seattle to St Louis
-public class Trip1 {
+//Sacremento to Green Bay
+public class Trip2 {
     static GoogleMap mMap;
     static int currRoute;
 
-    static LatLng seattle = new LatLng(47.6097, -122.3331);
-
-    static LatLng missoula = new LatLng(46.8625, -114.0117);
-    static LatLng minneapolis = new LatLng(44.9778, -93.2650);
+    static LatLng sacramento = new LatLng(38.5556, -121.4689);
 
     static LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
-    static LatLng northPlatte = new LatLng(41.1359, -100.7705);
+    static LatLng siouxFalls = new LatLng(43.5364, -96.7317);
 
-    static LatLng lasVegas = new LatLng(36.1215, -115.1739);
-    static LatLng denver = new LatLng(39.7392, -104.9903);
+    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
+    static LatLng desMoines = new LatLng(41.5908, -93.6208);
 
-    static LatLng stLouis = new LatLng(38.6272, -90.1978);
+    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
+    static LatLng kansasCity = new LatLng(39.0997, -94.5783);
 
-    public static void displayWeather1(GoogleMap map, int theRoute, int progress) {
+    static LatLng greenBay = new LatLng(44.5133, -88.0158);
+
+    public static void displayWeather(GoogleMap map, int theRoute, int progress) {
         mMap = map;
         currRoute = theRoute;
 
@@ -53,27 +48,27 @@ public class Trip1 {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
-                    seattleToStLouis();
+                    sacramentoTogreenBay();
                     break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                case 2: //detour through siouxFalls
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
                     break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                case 3: //detour through Kansas City
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
                 default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
+                    sacramentoTogreenBay();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
             }
 
-            //only need seattle weather at first
-            IconAdder.addIcon("Rain", mMap, seattle);
+            //only need sacramento weather at first
+            IconAdder.addIcon("Rain", mMap, sacramento);
         } else if (progress >= 25 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
@@ -81,97 +76,97 @@ public class Trip1 {
                 case 1: //no detour
                     IconAdder.addIcon("Tornado", mMap, saltLakeCity);
 
-                    seattleToStLouis();
+                    sacramentoTogreenBay();
                     break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Sun", mMap, missoula);
+                case 2: //detour through siouxFalls
+                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
                     break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
+                case 3: //detour through Kansas City
+                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
 
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Sun", mMap, missoula);
+                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
                     IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
+                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
+                    sacramentoTogreenBay();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
             }
         } else if (progress >= 50 && progress < 75) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
+                    IconAdder.addIcon("Tornado", mMap, desMoines);
 
-                    seattleToStLouis();
+                    sacramentoTogreenBay();
                     break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
+                case 2: //detour through siouxFalls
+                    IconAdder.addIcon("Snow", mMap, siouxFalls);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
                     break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Snow", mMap, denver);
+                case 3: //detour through Kansas City
+                    IconAdder.addIcon("Snow", mMap, kansasCity);
 
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
-                    IconAdder.addIcon("Snow", mMap, denver);
+                    IconAdder.addIcon("Snow", mMap, siouxFalls);
+                    IconAdder.addIcon("Tornado", mMap, desMoines);
+                    IconAdder.addIcon("Snow", mMap, kansasCity);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
+                    sacramentoTogreenBay();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
             }
         } else {
-            //display the weather at 100% into the trip (St louis)
+            //display the weather at 100% into the trip (green bay)
             switch (currRoute) {
                 case 1: //no detour
-                    seattleToStLouis();
+                    sacramentoTogreenBay();
                     break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                case 2: //detour through siouxFalls
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
                     break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                case 3: //detour through Kansas City
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
                 default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    sacramentoTosiouxFalls();
+                    siouxFallsTogreenBay();
+                    sacramentoTogreenBay();
+                    sacramentoTokansasCity();
+                    kansasCityTogreenBay();
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, stLouis);
+            IconAdder.addIcon("Sun", mMap, greenBay);
         }
     }
 
-    private static void seattleToStLouis() {
+    private static void sacramentoTogreenBay() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, stLouis).get();
+            doc = directions.execute(sacramento, greenBay).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,12 +189,12 @@ public class Trip1 {
         }
     }
 
-    private static void seattleToMinneapolis() {
+    private static void sacramentoTosiouxFalls() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, minneapolis).get();
+            doc = directions.execute(sacramento, siouxFalls).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -222,12 +217,12 @@ public class Trip1 {
         }
     }
 
-    private static void minneapolisToStLouis() {
+    private static void siouxFallsTogreenBay() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(minneapolis, stLouis).get();
+            doc = directions.execute(siouxFalls, greenBay).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -250,12 +245,12 @@ public class Trip1 {
         }
     }
 
-    private static void seattleToLasVegas() {
+    private static void sacramentoTokansasCity() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, lasVegas).get();
+            doc = directions.execute(sacramento, kansasCity).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -278,12 +273,12 @@ public class Trip1 {
         }
     }
 
-    private static void lasVegasToStLouis() {
+    private static void kansasCityTogreenBay() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(lasVegas, stLouis).get();
+            doc = directions.execute(kansasCity, greenBay).get();
         } catch (Exception e) {
             e.printStackTrace();
         }

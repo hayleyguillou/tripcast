@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route_button"
-            android:text="Red"
+            android:text="Yellow"
             android:visibility="invisible"
             />
         <Button
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route2"
-            android:text="Green"
+            android:text="Magenta"
             android:visibility="invisible"
             />
         <ImageView
