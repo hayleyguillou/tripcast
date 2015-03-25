@@ -1,12 +1,8 @@
 package com.comp4020.tripcast;
 
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
-import android.app.Activity;
-import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,29 +17,27 @@ import java.util.ArrayList;
  * Created by brianyeo on 2015-03-23.
  */
 
-//Seattle to St Louis
-public class Trip1 {
+//Phoenix to Orlando
+public class Trip3 {
     static GoogleMap mMap;
     static int currRoute;
-    static TextView routeInfo;
 
-    static LatLng seattle = new LatLng(47.6097, -122.3331);
+    static LatLng phoenix = new LatLng(33.4500, -112.0667);
 
-    static LatLng missoula = new LatLng(46.8625, -114.0117);
-    static LatLng minneapolis = new LatLng(44.9778, -93.2650);
+    static LatLng albuquerque = new LatLng(35.1107, -106.6100);
+    static LatLng dallas = new LatLng(32.7767, -96.7970);
 
-    static LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
-    static LatLng northPlatte = new LatLng(41.1359, -100.7705);
+    static LatLng ciudadJuarez = new LatLng(31.7394, -106.4869);
+    static LatLng sanAntonio = new LatLng(29.4167, -98.5000);
 
-    static LatLng lasVegas = new LatLng(36.1215, -115.1739);
-    static LatLng denver = new LatLng(39.7392, -104.9903);
+    static LatLng monterrey = new LatLng(25.6667, -100.3000);
+    static LatLng pensacola = new LatLng(30.4333, -87.2000);
 
-    static LatLng stLouis = new LatLng(38.6272, -90.1978);
+    static LatLng orlando = new LatLng(28.4158, -81.2989);
 
-    public static void displayWeather1(GoogleMap map, int theRoute, TextView rInfo, int progress) {
+    public static void displayWeather(GoogleMap map, int theRoute, TextView routeInfo, int progress) {
         mMap = map;
         currRoute = theRoute;
-        routeInfo = rInfo;
 
         mMap.clear(); //clear the screen
 
@@ -55,130 +49,125 @@ public class Trip1 {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
-                    seattleToStLouis();
+                    phoenixToorlando();
                     break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                case 2: //detour through albuquerque
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
                     break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                case 3: //detour through Kansas City
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
                 default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
+                    phoenixToorlando();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
             }
 
-            //only need seattle weather at first
-            IconAdder.addIcon("Rain", mMap, seattle);
-            routeInfo.setText("Seattle rainfall: 25mm\n\n");
-
+            //only need phoenix weather at first
+            IconAdder.addIcon("Rain", mMap, phoenix);
         } else if (progress >= 25 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    routeInfo.setText("Salt Lake City rainfall: 0mm\n\n");
+                    IconAdder.addIcon("Tornado", mMap, ciudadJuarez);
 
-                    seattleToStLouis();
+                    phoenixToorlando();
                     break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Sun", mMap, missoula);
-                    routeInfo.setText("Missoula rainfall: 10mm\n\n");
+                case 2: //detour through albuquerque
+                    IconAdder.addIcon("Sun", mMap, albuquerque);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
                     break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
-                    routeInfo.setText("Las Vegas rainfall: 0mm\n\n");
+                case 3: //detour through monterrey
+                    IconAdder.addIcon("Sun", mMap, monterrey);
 
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Sun", mMap, missoula);
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    IconAdder.addIcon("Sun", mMap, lasVegas);
+                    IconAdder.addIcon("Sun", mMap, ciudadJuarez);
+                    IconAdder.addIcon("Tornado", mMap, albuquerque);
+                    IconAdder.addIcon("Sun", mMap, monterrey);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
+                    phoenixToorlando();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
             }
         } else if (progress >= 50 && progress < 75) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
+                    IconAdder.addIcon("Tornado", mMap, sanAntonio);
 
-                    seattleToStLouis();
+                    phoenixToorlando();
                     break;
-                case 2: //detour through minneapolis
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
+                case 2: //detour through albuquerque
+                    IconAdder.addIcon("Snow", mMap, dallas);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
                     break;
-                case 3: //detour through Las Vegas
-                    IconAdder.addIcon("Snow", mMap, denver);
+                case 3: //detour through monterrey
+                    IconAdder.addIcon("Snow", mMap, pensacola);
 
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Snow", mMap, minneapolis);
-                    IconAdder.addIcon("Tornado", mMap, northPlatte);
-                    IconAdder.addIcon("Snow", mMap, denver);
+                    IconAdder.addIcon("Snow", mMap, sanAntonio);
+                    IconAdder.addIcon("Tornado", mMap, dallas);
+                    IconAdder.addIcon("Snow", mMap, pensacola);
 
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
+                    phoenixToorlando();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
             }
         } else {
-            //display the weather at 100% into the trip (St louis)
+            //display the weather at 100% into the trip (green bay)
             switch (currRoute) {
                 case 1: //no detour
-                    seattleToStLouis();
+                    phoenixToorlando();
                     break;
-                case 2: //detour through minneapolis
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
+                case 2: //detour through albuquerque
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
                     break;
-                case 3: //detour through Las Vegas
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                case 3: //detour through monterrey
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
                 default: //all routes
-                    seattleToMinneapolis();
-                    minneapolisToStLouis();
-                    seattleToStLouis();
-                    seattleToLasVegas();
-                    lasVegasToStLouis();
+                    phoenixToAlbuquerque();
+                    albuquerqueToorlando();
+                    phoenixToorlando();
+                    phoenixTomonterrey();
+                    monterreyToorlando();
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, stLouis);
+            IconAdder.addIcon("Sun", mMap, orlando);
         }
     }
 
-    private static void seattleToStLouis() {
+    private static void phoenixToorlando() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, stLouis).get();
+            doc = directions.execute(phoenix, orlando).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,16 +186,16 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
-    private static void seattleToMinneapolis() {
+    private static void phoenixToAlbuquerque() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, minneapolis).get();
+            doc = directions.execute(phoenix, albuquerque).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -225,16 +214,16 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
-    private static void minneapolisToStLouis() {
+    private static void albuquerqueToorlando() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(minneapolis, stLouis).get();
+            doc = directions.execute(albuquerque, orlando).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -253,16 +242,16 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
-    private static void seattleToLasVegas() {
+    private static void phoenixTomonterrey() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(seattle, lasVegas).get();
+            doc = directions.execute(phoenix, monterrey).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -281,16 +270,16 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
-    private static void lasVegasToStLouis() {
+    private static void monterreyToorlando() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(lasVegas, stLouis).get();
+            doc = directions.execute(monterrey, orlando).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -307,16 +296,17 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
-    private static void addWrittenDirections(NodeList instructions, int id) {
+    /*private static void addWrittenDirections(NodeList instructions, int id) {
+        TextView routeInfo = (TextView) findViewById(id);
 
         for (int i = 0; i < instructions.getLength(); i++) {
             routeInfo.append(
                     Html.fromHtml(instructions.item(i).getTextContent() + "\n")
             );
         }
-    }
+    }*/
 }

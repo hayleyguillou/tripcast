@@ -24,15 +24,15 @@ import java.util.ArrayList;
 //Seattle to St Louis
 public class Trip {
 
-    public static void newTrip(int whichTrip, GoogleMap map, int theRoute, int progress){
+    public static void newTrip(int whichTrip, GoogleMap map, int theRoute, TextView routeInfo, int progress){
         if (whichTrip == 1) {
-            Trip1.displayWeather1(map, theRoute, progress);
+            Trip1.displayWeather1(map, theRoute, routeInfo, progress);
         }
-        else if (whichTrip ==2) {
-            Trip2.displayWeather(map, theRoute, progress);
+        else if (whichTrip == 2) {
+            Trip2.displayWeather(map, theRoute, routeInfo, progress);
         }
-        else {
-
+        else if (whichTrip == 3) {
+            Trip3.displayWeather(map, theRoute, routeInfo, progress);
         }
     }
 
