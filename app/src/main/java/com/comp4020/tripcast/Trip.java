@@ -28,11 +28,11 @@ public class Trip {
         if (whichTrip == 1) {
             Trip1.displayWeather1(map, theRoute, routeInfo, progress);
         }
-        else if (whichTrip ==2) {
+        else if (whichTrip == 2) {
             Trip2.displayWeather(map, theRoute, routeInfo, progress);
         }
-        else {
-
+        else if (whichTrip == 3) {
+            Trip3.displayWeather(map, theRoute, routeInfo, progress);
         }
     }
 

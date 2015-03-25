@@ -169,6 +169,9 @@ public class MapsActivity extends FragmentActivity {
                 else if (origin.equals("sacramento") && destination.equals("green bay")) {
                     tripNum = 2;
                 }
+                else if (origin.equals("phoenix") && destination.equals("orlando")) {
+                    tripNum = 3;
+                }
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);

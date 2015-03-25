@@ -71,6 +71,14 @@
             android:id="@+id/map"
             tools:context=".MapsActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:translationY="100dp"
+                android:translationX="-8dp"
+                android:src="@drawable/right"
+                />
         </fragment>
     </FrameLayout>
 
