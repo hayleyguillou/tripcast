@@ -78,13 +78,13 @@ public class Trip3 {
             }
 
             //only need phoenix weather at first
-            IconAdder.addIcon("Rain", mMap, phoenix);
+            IconAdder.addIcon("Sun", mMap, phoenix);
         } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, ciudadJuarez);
+                    IconAdder.addIcon("Sun", mMap, ciudadJuarez);
 
                     phoenixToorlando();
 
@@ -129,7 +129,7 @@ public class Trip3 {
                     routeInfo.setText("Total trip time: 30h");
                     break;
                 case 2: //detour through albuquerque
-                    IconAdder.addIcon("Snow", mMap, dallas);
+                    IconAdder.addIcon("Rain", mMap, dallas);
 
                     phoenixToAlbuquerque();
                     albuquerqueToorlando();
@@ -137,7 +137,7 @@ public class Trip3 {
                     routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through monterrey
-                    IconAdder.addIcon("Snow", mMap, pensacola);
+                    IconAdder.addIcon("Rain", mMap, pensacola);
 
                     phoenixTomonterrey();
                     monterreyToorlando();

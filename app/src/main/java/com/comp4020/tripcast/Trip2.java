@@ -81,7 +81,7 @@ public class Trip2 {
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                    IconAdder.addIcon("Rain", mMap, saltLakeCity);
 
                     sacramentoTogreenBay();
 
@@ -119,7 +119,7 @@ public class Trip2 {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, desMoines);
+                    IconAdder.addIcon("Rain", mMap, desMoines);
 
                     sacramentoTogreenBay();
                     routeInfo.setText("Total trip time: 31h");
@@ -132,7 +132,7 @@ public class Trip2 {
                     routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through Kansas City
-                    IconAdder.addIcon("Snow", mMap, kansasCity);
+                    IconAdder.addIcon("Rain", mMap, kansasCity);
 
                     sacramentoTokansasCity();
                     kansasCityTogreenBay();

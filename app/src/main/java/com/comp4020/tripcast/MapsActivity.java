@@ -125,17 +125,17 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private void setUpLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new MyLocationListener();
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //LocationListener locationListener = new MyLocationListener();
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         LatLng latLng;
-        if(location == null) {
+        //if(location == null) {
             latLng = new LatLng(49.8994,-97.1392);
-        } else {
-            latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        }
+        //} else {
+            //latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        //}
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
         mMap.addMarker(new MarkerOptions()
@@ -165,18 +165,23 @@ public class MapsActivity extends FragmentActivity {
                 //determine correct trip we are going on
                 if (origin.equals("seattle") && destination.equals("st. louis")) {
                     tripNum = 1;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(47.6097, -122.3331), 14.0f));
                 }
                 else if (origin.equals("sacramento") && destination.equals("green bay")) {
                     tripNum = 2;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(38.5556, -121.4689), 14.0f));
                 }
                 else if (origin.equals("phoenix") && destination.equals("orlando")) {
                     tripNum = 3;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.4500, -112.0667), 14.0f));
                 }
                 else if (origin.equals("new orleans") && destination.equals("chattanooga")) {
                     tripNum = 4;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(29.9500, -90.0667), 14.0f));
                 }
                 else if (origin.equals("cleveland") && destination.equals("philadelphia")) {
                     tripNum = 5;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(41.4822, -81.6697), 14.0f));
                 }
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -271,8 +276,8 @@ public class MapsActivity extends FragmentActivity {
 
                 //Set textview scrollbars
                 ((TextView) findViewById(R.id.route_info_textview)).setMovementMethod(new ScrollingMovementMethod());
-                ((TextView) findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
-                ((TextView) findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                //((TextView) findViewById(R.id.route2_info_textview)).setMovementMethod(new ScrollingMovementMethod());
+                //((TextView) findViewById(R.id.route3_info_textview)).setMovementMethod(new ScrollingMovementMethod());
             }
         });
     }

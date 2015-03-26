@@ -84,7 +84,7 @@ public class Trip4 {
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, meridian);
+                    IconAdder.addIcon("Rain", mMap, meridian);
 
                     newOrleansTochattanooga();
 
@@ -122,14 +122,14 @@ public class Trip4 {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, birmingham);
+                    IconAdder.addIcon("Rain", mMap, birmingham);
 
                     newOrleansTochattanooga();
 
                     routeInfo.setText("Total trip time: 7h 1m");
                     break;
                 case 2: //detour through jackson
-                    IconAdder.addIcon("Snow", mMap, birmingham);
+                    IconAdder.addIcon("Sun", mMap, birmingham);
 
                     newOrleansTojackson();
                     jacksonTochattanooga();
@@ -137,7 +137,7 @@ public class Trip4 {
                     routeInfo.setText("Total trip time: 8h 9m");
                     break;
                 case 3: //detour through montgomery
-                    IconAdder.addIcon("Snow", mMap, atlanta);
+                    IconAdder.addIcon("Sun", mMap, atlanta);
 
                     newOrleansToatlanta();
                     atlantaTochattanooga();
