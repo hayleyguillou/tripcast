@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
->
+    >
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -18,16 +19,53 @@
             android:id="@+id/map"
             tools:context=".MapsActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" >
-            <SeekBar
-                android:id="@+id/trip_pos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="800dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:visibility="invisible"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:translationY="100dp"
+                android:translationX="-8dp"
+                android:src="@drawable/right"
+                />
         </fragment>
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/route_info_text"
+        android:orientation="vertical"
+        android:weightSum="5"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:background="@android:color/transparent"
+        android:visibility="invisible">
+
+        <SeekBar
+            android:id="@+id/trip_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="800dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:visibility="invisible"/>
+
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white">
+            <TextView
+                android:id="@+id/route_info_textview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Route 1:"
+                android:maxLines="10"
+                android:scrollbars="vertical"
+                android:textSize="40dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/menu_bar"
         android:layout_width="match_parent"
@@ -39,21 +77,21 @@
             android:layout_height="wrap_content"
             android:text="Select Route"
             android:visibility="invisible"
-        />
+            />
         <Button
             android:id="@+id/route1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route_button"
-            android:text="Red"
+            android:text=" Yellow"
             android:visibility="invisible"
-        />
+            />
         <Button
             android:id="@+id/route2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route1"
-            android:text="Blue"
+            android:text="  Blue  "
             android:visibility="invisible"
             />
         <Button
@@ -61,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route2"
-            android:text="Green"
+            android:text="Magenta"
             android:visibility="invisible"
             />
         <ImageView
@@ -72,84 +110,6 @@
             android:clickable="true"
             />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/route1_info_text"
-        android:orientation="vertical"
-        android:weightSum="5"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:background="@android:color/transparent"
-        android:visibility="invisible">
-
-        <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/white">
-            <TextView
-                android:id="@+id/route1_info_textview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Route 1:"
-                android:maxLines="10"
-                android:scrollbars="vertical"
-            />
-            </LinearLayout>
-        </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/route2_info_text"
-        android:orientation="vertical"
-        android:weightSum="5"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:background="@android:color/transparent"
-        android:visibility="invisible">
-
-        <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/white">
-            <TextView
-                android:id="@+id/route2_info_textview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Route 2:"
-                android:maxLines="10"
-                android:scrollbars="vertical"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/route3_info_text"
-        android:orientation="vertical"
-        android:weightSum="5"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:background="@android:color/transparent"
-        android:visibility="invisible">
-
-        <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/white">
-            <TextView
-                android:id="@+id/route3_info_textview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Route 3:"
-                android:maxLines="10"
-                android:scrollbars="vertical"
-                />
-        </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/left_drawer"
@@ -166,31 +126,39 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Trip Origin:"
-        />
+            />
         <EditText
             android:id="@+id/route_input1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:lines="2"
-        />
+            />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Trip Destination:"
-        />
+            />
         <EditText
             android:id="@+id/route_input2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-        />
+            />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Date: April 1, 2015\n\n"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Time: 9:00 AM\n\n\n"/>
         <Button
             android:id="@+id/trip_set_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Trip"
-        />
+            />
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
