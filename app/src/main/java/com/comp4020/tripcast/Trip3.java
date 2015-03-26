@@ -18,6 +18,9 @@ import java.util.ArrayList;
  */
 
 //Phoenix to Orlando
+//No detour: 30 h
+//Via albuquerque: 31 h
+//Via monterrey: 38 h
 public class Trip3 {
     static GoogleMap mMap;
     static int currRoute;
@@ -45,19 +48,25 @@ public class Trip3 {
         Log.i("route", route);
 
         //update the weather seen
-        if (progress < 25) {
+        if (progress < 15) {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
                     phoenixToorlando();
+
+                    routeInfo.setText("Total trip time: 30h");
                     break;
                 case 2: //detour through albuquerque
                     phoenixToAlbuquerque();
                     albuquerqueToorlando();
+
+                    routeInfo.setText("Total trip time: 31h");
                     break;
-                case 3: //detour through Kansas City
+                case 3: //detour through monterry
                     phoenixTomonterrey();
                     monterreyToorlando();
+
+                    routeInfo.setText("Total trip time: 38h");
                     break;
                 default: //all routes
                     phoenixToAlbuquerque();
@@ -70,7 +79,7 @@ public class Trip3 {
 
             //only need phoenix weather at first
             IconAdder.addIcon("Rain", mMap, phoenix);
-        } else if (progress >= 25 && progress < 50) {
+        } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
@@ -78,18 +87,24 @@ public class Trip3 {
                     IconAdder.addIcon("Tornado", mMap, ciudadJuarez);
 
                     phoenixToorlando();
+
+                    routeInfo.setText("Total trip time: 30h");
                     break;
                 case 2: //detour through albuquerque
                     IconAdder.addIcon("Sun", mMap, albuquerque);
 
                     phoenixToAlbuquerque();
                     albuquerqueToorlando();
+
+                    routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through monterrey
                     IconAdder.addIcon("Sun", mMap, monterrey);
 
                     phoenixTomonterrey();
                     monterreyToorlando();
+
+                    routeInfo.setText("Total trip time: 38h");
                     break;
                 default: //all routes
                     IconAdder.addIcon("Sun", mMap, ciudadJuarez);
@@ -103,25 +118,31 @@ public class Trip3 {
                     monterreyToorlando();
                     break;
             }
-        } else if (progress >= 50 && progress < 75) {
+        } else if (progress >= 50 && progress < 85) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
                     IconAdder.addIcon("Tornado", mMap, sanAntonio);
 
                     phoenixToorlando();
+
+                    routeInfo.setText("Total trip time: 30h");
                     break;
                 case 2: //detour through albuquerque
                     IconAdder.addIcon("Snow", mMap, dallas);
 
                     phoenixToAlbuquerque();
                     albuquerqueToorlando();
+
+                    routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through monterrey
                     IconAdder.addIcon("Snow", mMap, pensacola);
 
                     phoenixTomonterrey();
                     monterreyToorlando();
+
+                    routeInfo.setText("Total trip time: 38h");
                     break;
                 default: //all routes
                     IconAdder.addIcon("Snow", mMap, sanAntonio);
@@ -140,14 +161,20 @@ public class Trip3 {
             switch (currRoute) {
                 case 1: //no detour
                     phoenixToorlando();
+
+                    routeInfo.setText("Total trip time: 30h");
                     break;
                 case 2: //detour through albuquerque
                     phoenixToAlbuquerque();
                     albuquerqueToorlando();
+
+                    routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through monterrey
                     phoenixTomonterrey();
                     monterreyToorlando();
+
+                    routeInfo.setText("Total trip time: 38h");
                     break;
                 default: //all routes
                     phoenixToAlbuquerque();

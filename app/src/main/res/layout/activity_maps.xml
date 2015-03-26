@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route_button"
-            android:text="Yellow"
+            android:text=" Yellow"
             android:visibility="invisible"
             />
         <Button
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/route1"
-            android:text="Blue"
+            android:text="  Blue  "
             android:visibility="invisible"
             />
         <Button
@@ -196,6 +196,14 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Date: April 1, 2015\n\n"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Time: 9:00 AM\n\n\n"/>
         <Button
             android:id="@+id/trip_set_button"
             android:layout_width="wrap_content"

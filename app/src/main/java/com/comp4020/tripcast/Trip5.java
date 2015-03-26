@@ -17,26 +17,26 @@ import java.util.ArrayList;
  * Created by brianyeo on 2015-03-23.
  */
 
-//Sacremento to Green Bay
-//No detour: 31 h
-//Via sioux falls: 31 h
-//Via kansas city: 34 h
-public class Trip2 {
+//cleveland to philadelphia
+//No detour: 6h 32m
+//Via williamsport: 7h 18m
+//Via morgantown: 6h 41m
+public class Trip5 {
     static GoogleMap mMap;
     static int currRoute;
 
-    static LatLng sacramento = new LatLng(38.5556, -121.4689);
+    static LatLng cleveland = new LatLng(41.4822, -81.6697);
 
-    static LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
-    static LatLng siouxFalls = new LatLng(43.5364, -96.7317);
+    static LatLng forest = new LatLng(41.2444, -79.0010);
+    static LatLng williamsport = new LatLng(41.2444, -77.0186);
 
-    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
-    static LatLng desMoines = new LatLng(41.5908, -93.6208);
+    static LatLng pittsburgh = new LatLng(40.4397, -79.9764);
+    static LatLng harrisburg = new LatLng(40.2697, -76.8756);
 
-    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
-    static LatLng kansasCity = new LatLng(39.0997, -94.5783);
+    static LatLng morgantown = new LatLng(39.6336, -79.9506);
+    static LatLng baltimore = new LatLng(39.2833, -76.6167);
 
-    static LatLng greenBay = new LatLng(44.5133, -88.0158);
+    static LatLng philadelphia = new LatLng(39.9500, -75.1667);
 
     public static void displayWeather(GoogleMap map, int theRoute, TextView routeInfo, int progress) {
         mMap = map;
@@ -52,143 +52,149 @@ public class Trip2 {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
-                    sacramentoTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    clevelandTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 6h 32m");
                     break;
-                case 2: //detour through siouxFalls
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                case 2: //detour through forest
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 7h 18m");
                     break;
-                case 3: //detour through Kansas City
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
-                    routeInfo.setText("Total trip time: 34h");
+                case 3: //detour through morgantown
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 6h 41m");
                     break;
                 default: //all routes
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+                    clevelandTophiladelphia();
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
                     break;
             }
 
-            //only need sacramento weather at first
-            IconAdder.addIcon("Rain", mMap, sacramento);
+            //only need cleveland weather at first
+            IconAdder.addIcon("Rain", mMap, cleveland);
         } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                    IconAdder.addIcon("Tornado", mMap, pittsburgh);
 
-                    sacramentoTogreenBay();
+                    clevelandTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 6h 32m");
                     break;
-                case 2: //detour through siouxFalls
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                case 2: //detour through forest
+                    IconAdder.addIcon("Sun", mMap, forest);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 7h 18m");
                     break;
-                case 3: //detour through Kansas City
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                case 3: //detour through morgantown
+                    IconAdder.addIcon("Sun", mMap, morgantown);
 
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 34h");
+                    routeInfo.setText("Total trip time: 6h 41m");
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                    IconAdder.addIcon("Sun", mMap, pittsburgh);
+                    IconAdder.addIcon("Tornado", mMap, forest);
+                    IconAdder.addIcon("Sun", mMap, morgantown);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+                    clevelandTophiladelphia();
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
                     break;
             }
         } else if (progress >= 50 && progress < 85) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, desMoines);
+                    IconAdder.addIcon("Tornado", mMap, harrisburg);
 
-                    sacramentoTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    clevelandTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 6h 32m");
                     break;
-                case 2: //detour through siouxFalls
-                    IconAdder.addIcon("Snow", mMap, siouxFalls);
+                case 2: //detour through forest
+                    IconAdder.addIcon("Snow", mMap, williamsport);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 7h 18m");
                     break;
-                case 3: //detour through Kansas City
-                    IconAdder.addIcon("Snow", mMap, kansasCity);
+                case 3: //detour through morgantown
+                    IconAdder.addIcon("Snow", mMap, baltimore);
 
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
-                    routeInfo.setText("Total trip time: 34h");
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
+
+                    routeInfo.setText("Total trip time: 6h 41m");
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Snow", mMap, siouxFalls);
-                    IconAdder.addIcon("Tornado", mMap, desMoines);
-                    IconAdder.addIcon("Snow", mMap, kansasCity);
+                    IconAdder.addIcon("Snow", mMap, harrisburg);
+                    IconAdder.addIcon("Tornado", mMap, williamsport);
+                    IconAdder.addIcon("Snow", mMap, baltimore);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+                    clevelandTophiladelphia();
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
                     break;
             }
         } else {
             //display the weather at 100% into the trip (green bay)
             switch (currRoute) {
                 case 1: //no detour
-                    sacramentoTogreenBay();
+                    clevelandTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 6h 32m");
                     break;
-                case 2: //detour through siouxFalls
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
+                case 2: //detour through forest
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 7h 18m");
                     break;
-                case 3: //detour through Kansas City
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                case 3: //detour through morgantown
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
 
-                    routeInfo.setText("Total trip time: 34h");
+                    routeInfo.setText("Total trip time: 6h 41m");
                     break;
                 default: //all routes
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    clevelandTowilliamsport();
+                    williamsportTophiladelphia();
+                    clevelandTophiladelphia();
+                    clevelandTomorgantown();
+                    morgantownTophiladelphia();
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, greenBay);
+            IconAdder.addIcon("Sun", mMap, philadelphia);
         }
     }
 
-    private static void sacramentoTogreenBay() {
+    private static void clevelandTophiladelphia() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, greenBay).get();
+            doc = directions.execute(cleveland, philadelphia).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,12 +217,12 @@ public class Trip2 {
         }
     }
 
-    private static void sacramentoTosiouxFalls() {
+    private static void clevelandTowilliamsport() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, siouxFalls).get();
+            doc = directions.execute(cleveland, williamsport).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -239,12 +245,12 @@ public class Trip2 {
         }
     }
 
-    private static void siouxFallsTogreenBay() {
+    private static void williamsportTophiladelphia() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(siouxFalls, greenBay).get();
+            doc = directions.execute(williamsport, philadelphia).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -267,12 +273,12 @@ public class Trip2 {
         }
     }
 
-    private static void sacramentoTokansasCity() {
+    private static void clevelandTomorgantown() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, kansasCity).get();
+            doc = directions.execute(cleveland, morgantown).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,12 +301,12 @@ public class Trip2 {
         }
     }
 
-    private static void kansasCityTogreenBay() {
+    private static void morgantownTophiladelphia() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(kansasCity, greenBay).get();
+            doc = directions.execute(morgantown, philadelphia).get();
         } catch (Exception e) {
             e.printStackTrace();
         }

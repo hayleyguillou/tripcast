@@ -34,6 +34,12 @@ public class Trip {
         else if (whichTrip == 3) {
             Trip3.displayWeather(map, theRoute, routeInfo, progress);
         }
+        else if (whichTrip == 4) {
+            Trip4.displayWeather(map, theRoute, routeInfo, progress);
+        }
+        else if (whichTrip == 5) {
+            Trip5.displayWeather(map, theRoute, routeInfo, progress);
+        }
     }
 
  }
