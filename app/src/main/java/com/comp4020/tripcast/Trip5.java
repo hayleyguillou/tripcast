@@ -78,20 +78,20 @@ public class Trip5 {
             }
 
             //only need cleveland weather at first
-            IconAdder.addIcon("Rain", mMap, cleveland);
+            IconAdder.addIcon("Snow", mMap, cleveland);
         } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, pittsburgh);
+                    IconAdder.addIcon("Snow", mMap, pittsburgh);
 
                     clevelandTophiladelphia();
 
                     routeInfo.setText("Total trip time: 6h 32m");
                     break;
                 case 2: //detour through forest
-                    IconAdder.addIcon("Sun", mMap, forest);
+                    IconAdder.addIcon("Snow", mMap, forest);
 
                     clevelandTowilliamsport();
                     williamsportTophiladelphia();
@@ -99,7 +99,7 @@ public class Trip5 {
                     routeInfo.setText("Total trip time: 7h 18m");
                     break;
                 case 3: //detour through morgantown
-                    IconAdder.addIcon("Sun", mMap, morgantown);
+                    IconAdder.addIcon("Snow", mMap, morgantown);
 
                     clevelandTomorgantown();
                     morgantownTophiladelphia();
@@ -122,14 +122,14 @@ public class Trip5 {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, harrisburg);
+                    IconAdder.addIcon("Snow", mMap, harrisburg);
 
                     clevelandTophiladelphia();
 
                     routeInfo.setText("Total trip time: 6h 32m");
                     break;
                 case 2: //detour through forest
-                    IconAdder.addIcon("Snow", mMap, williamsport);
+                    IconAdder.addIcon("Rain", mMap, williamsport);
 
                     clevelandTowilliamsport();
                     williamsportTophiladelphia();
@@ -137,7 +137,7 @@ public class Trip5 {
                     routeInfo.setText("Total trip time: 7h 18m");
                     break;
                 case 3: //detour through morgantown
-                    IconAdder.addIcon("Snow", mMap, baltimore);
+                    IconAdder.addIcon("Rain", mMap, baltimore);
 
                     clevelandTomorgantown();
                     morgantownTophiladelphia();
@@ -185,7 +185,7 @@ public class Trip5 {
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, philadelphia);
+            IconAdder.addIcon("Snow", mMap, philadelphia);
         }
     }
 
