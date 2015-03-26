@@ -17,26 +17,26 @@ import java.util.ArrayList;
  * Created by brianyeo on 2015-03-23.
  */
 
-//Sacremento to Green Bay
-//No detour: 31 h
-//Via sioux falls: 31 h
-//Via kansas city: 34 h
-public class Trip2 {
+//newOrleans to chattanooga
+//No detour: 7h 1m
+//Via jackson: 8h 9m
+//Via atlanta: 8h 20m
+public class Trip4 {
     static GoogleMap mMap;
     static int currRoute;
 
-    static LatLng sacramento = new LatLng(38.5556, -121.4689);
+    static LatLng newOrleans = new LatLng(29.9500, -90.0667);
 
-    static LatLng saltLakeCity = new LatLng(40.7500, -111.8833);
-    static LatLng siouxFalls = new LatLng(43.5364, -96.7317);
+    static LatLng jackson = new LatLng(32.2989, -90.1847);
+    //static LatLng birmingham = new LatLng(32.7767, -96.7970); already defined
 
-    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
-    static LatLng desMoines = new LatLng(41.5908, -93.6208);
+    static LatLng meridian = new LatLng(32.3747, -88.7042);
+    static LatLng birmingham = new LatLng(33.5250, -86.8130);
 
-    //LatLng saltLakeCity = new LatLng(40.7500, -111.8833); salt lake city already defined
-    static LatLng kansasCity = new LatLng(39.0997, -94.5783);
+    static LatLng montgomery = new LatLng(32.3617, -86.2792);
+    static LatLng atlanta = new LatLng(33.7550, -84.3900);
 
-    static LatLng greenBay = new LatLng(44.5133, -88.0158);
+    static LatLng chattanooga = new LatLng(35.0456, -85.2672);
 
     public static void displayWeather(GoogleMap map, int theRoute, TextView routeInfo, int progress) {
         mMap = map;
@@ -52,143 +52,149 @@ public class Trip2 {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
-                    sacramentoTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    newOrleansTochattanooga();
+
+                    routeInfo.setText("Total trip time: 7h 1m");
                     break;
-                case 2: //detour through siouxFalls
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                case 2: //detour through jackson
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+
+                    routeInfo.setText("Total trip time: 8h 9m");
                     break;
-                case 3: //detour through Kansas City
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
-                    routeInfo.setText("Total trip time: 34h");
+                case 3: //detour through atlanta
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
+
+                    routeInfo.setText("Total trip time: 8h 20m");
                     break;
                 default: //all routes
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+                    newOrleansTochattanooga();
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
                     break;
             }
 
-            //only need sacramento weather at first
-            IconAdder.addIcon("Rain", mMap, sacramento);
+            //only need newOrleans weather at first
+            IconAdder.addIcon("Rain", mMap, newOrleans);
         } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                    IconAdder.addIcon("Tornado", mMap, meridian);
 
-                    sacramentoTogreenBay();
+                    newOrleansTochattanooga();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 7h 1m");
                     break;
-                case 2: //detour through siouxFalls
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                case 2: //detour through jackson
+                    IconAdder.addIcon("Sun", mMap, jackson);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 8h 9m");
                     break;
-                case 3: //detour through Kansas City
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                case 3: //detour through atlanta
+                    IconAdder.addIcon("Sun", mMap, montgomery);
 
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
 
-                    routeInfo.setText("Total trip time: 34h");
+                    routeInfo.setText("Total trip time: 8h 20m");
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                    IconAdder.addIcon("Sun", mMap, meridian);
+                    IconAdder.addIcon("Tornado", mMap, jackson);
+                    IconAdder.addIcon("Sun", mMap, montgomery);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+                    newOrleansTochattanooga();
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
                     break;
             }
         } else if (progress >= 50 && progress < 85) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, desMoines);
+                    IconAdder.addIcon("Tornado", mMap, birmingham);
 
-                    sacramentoTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    newOrleansTochattanooga();
+
+                    routeInfo.setText("Total trip time: 7h 1m");
                     break;
-                case 2: //detour through siouxFalls
-                    IconAdder.addIcon("Snow", mMap, siouxFalls);
+                case 2: //detour through jackson
+                    IconAdder.addIcon("Snow", mMap, birmingham);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    routeInfo.setText("Total trip time: 31h");
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+
+                    routeInfo.setText("Total trip time: 8h 9m");
                     break;
-                case 3: //detour through Kansas City
-                    IconAdder.addIcon("Snow", mMap, kansasCity);
+                case 3: //detour through montgomery
+                    IconAdder.addIcon("Snow", mMap, atlanta);
 
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
-                    routeInfo.setText("Total trip time: 34h");
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
+
+                    routeInfo.setText("Total trip time: 8h 20m");
                     break;
                 default: //all routes
-                    IconAdder.addIcon("Snow", mMap, siouxFalls);
-                    IconAdder.addIcon("Tornado", mMap, desMoines);
-                    IconAdder.addIcon("Snow", mMap, kansasCity);
+                    IconAdder.addIcon("Snow", mMap, birmingham);
+                    IconAdder.addIcon("Tornado", mMap, birmingham);
+                    IconAdder.addIcon("Snow", mMap, atlanta);
 
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+                    newOrleansTochattanooga();
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
                     break;
             }
         } else {
             //display the weather at 100% into the trip (green bay)
             switch (currRoute) {
                 case 1: //no detour
-                    sacramentoTogreenBay();
+                    newOrleansTochattanooga();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 7h 1m");
                     break;
-                case 2: //detour through siouxFalls
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
+                case 2: //detour through jackson
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
 
-                    routeInfo.setText("Total trip time: 31h");
+                    routeInfo.setText("Total trip time: 8h 9m");
                     break;
-                case 3: //detour through Kansas City
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                case 3: //detour through montgomery
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
 
-                    routeInfo.setText("Total trip time: 34h");
+                    routeInfo.setText("Total trip time: 8h 20m");
                     break;
                 default: //all routes
-                    sacramentoTosiouxFalls();
-                    siouxFallsTogreenBay();
-                    sacramentoTogreenBay();
-                    sacramentoTokansasCity();
-                    kansasCityTogreenBay();
+                    newOrleansTojackson();
+                    jacksonTochattanooga();
+                    newOrleansTochattanooga();
+                    newOrleansToatlanta();
+                    atlantaTochattanooga();
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, greenBay);
+            IconAdder.addIcon("Sun", mMap, chattanooga);
         }
     }
 
-    private static void sacramentoTogreenBay() {
+    private static void newOrleansTochattanooga() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, greenBay).get();
+            doc = directions.execute(newOrleans, chattanooga).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,12 +217,12 @@ public class Trip2 {
         }
     }
 
-    private static void sacramentoTosiouxFalls() {
+    private static void newOrleansTojackson() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, siouxFalls).get();
+            doc = directions.execute(newOrleans, jackson).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -239,12 +245,12 @@ public class Trip2 {
         }
     }
 
-    private static void siouxFallsTogreenBay() {
+    private static void jacksonTochattanooga() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(siouxFalls, greenBay).get();
+            doc = directions.execute(jackson, chattanooga).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -267,12 +273,12 @@ public class Trip2 {
         }
     }
 
-    private static void sacramentoTokansasCity() {
+    private static void newOrleansToatlanta() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(sacramento, kansasCity).get();
+            doc = directions.execute(newOrleans, atlanta).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,12 +301,12 @@ public class Trip2 {
         }
     }
 
-    private static void kansasCityTogreenBay() {
+    private static void atlantaTochattanooga() {
         GMapV2Direction directions = new GMapV2Direction();
         Document doc = null;
 
         try {
-            doc = directions.execute(kansasCity, greenBay).get();
+            doc = directions.execute(atlanta, chattanooga).get();
         } catch (Exception e) {
             e.printStackTrace();
         }

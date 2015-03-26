@@ -22,6 +22,9 @@ import java.util.ArrayList;
  */
 
 //Seattle to St Louis
+//No detour: 31 h
+//Via minneapolis: 32 h
+//Via las vegas: 39 h
 public class Trip1 {
     static GoogleMap mMap;
     static int currRoute;
@@ -51,19 +54,22 @@ public class Trip1 {
         Log.i("route", route);
 
         //update the weather seen
-        if (progress < 25) {
+        if (progress < 15) {
             //display weather at 0% into the trip
             switch (currRoute) {
                 case 1: //no detour
                     seattleToStLouis();
+                    routeInfo.setText("Total trip time: 31h");
                     break;
                 case 2: //detour through minneapolis
                     seattleToMinneapolis();
                     minneapolisToStLouis();
+                    routeInfo.setText("Total trip time: 32h");
                     break;
                 case 3: //detour through Las Vegas
                     seattleToLasVegas();
                     lasVegasToStLouis();
+                    routeInfo.setText("Total trip time: 39h");
                     break;
                 default: //all routes
                     seattleToMinneapolis();
@@ -76,28 +82,27 @@ public class Trip1 {
 
             //only need seattle weather at first
             IconAdder.addIcon("Rain", mMap, seattle);
-            routeInfo.setText("Seattle rainfall: 25mm\n\n");
 
-        } else if (progress >= 25 && progress < 50) {
+        } else if (progress >= 15 && progress < 50) {
 
             //display the weather at 25% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
-                    routeInfo.setText("Salt Lake City rainfall: 0mm\n\n");
+                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                    routeInfo.setText("Total trip time: 31h");
 
                     seattleToStLouis();
                     break;
                 case 2: //detour through minneapolis
-                    IconAdder.addIcon("Sun", mMap, missoula);
-                    routeInfo.setText("Missoula rainfall: 10mm\n\n");
+                    IconAdder.addIcon("Rain", mMap, missoula);
+                    routeInfo.setText("Total trip time: 32h");
 
                     seattleToMinneapolis();
                     minneapolisToStLouis();
                     break;
                 case 3: //detour through Las Vegas
                     IconAdder.addIcon("Sun", mMap, lasVegas);
-                    routeInfo.setText("Las Vegas rainfall: 0mm\n\n");
+                    routeInfo.setText("Total trip time: 39h");
 
                     seattleToLasVegas();
                     lasVegasToStLouis();
@@ -114,22 +119,25 @@ public class Trip1 {
                     lasVegasToStLouis();
                     break;
             }
-        } else if (progress >= 50 && progress < 75) {
+        } else if (progress >= 50 && progress < 85) {
             //display the weather at 50% into the trip, depending on which route has been chosen
             switch (currRoute) {
                 case 1: //no detour
                     IconAdder.addIcon("Tornado", mMap, northPlatte);
+                    routeInfo.setText("Total trip time: 31h");
 
                     seattleToStLouis();
                     break;
                 case 2: //detour through minneapolis
                     IconAdder.addIcon("Snow", mMap, minneapolis);
+                    routeInfo.setText("Total trip time: 32h");
 
                     seattleToMinneapolis();
                     minneapolisToStLouis();
                     break;
                 case 3: //detour through Las Vegas
                     IconAdder.addIcon("Snow", mMap, denver);
+                    routeInfo.setText("Total trip time: 39h");
 
                     seattleToLasVegas();
                     lasVegasToStLouis();
@@ -151,14 +159,17 @@ public class Trip1 {
             switch (currRoute) {
                 case 1: //no detour
                     seattleToStLouis();
+                    routeInfo.setText("Total trip time: 31h");
                     break;
                 case 2: //detour through minneapolis
                     seattleToMinneapolis();
                     minneapolisToStLouis();
+                    routeInfo.setText("Total trip time: 32h");
                     break;
                 case 3: //detour through Las Vegas
                     seattleToLasVegas();
                     lasVegasToStLouis();
+                    routeInfo.setText("Total trip time: 39h");
                     break;
                 default: //all routes
                     seattleToMinneapolis();
@@ -169,7 +180,7 @@ public class Trip1 {
                     break;
             }
 
-            IconAdder.addIcon("Sun", mMap, stLouis);
+            IconAdder.addIcon("Rain", mMap, stLouis);
         }
     }
 
@@ -197,7 +208,7 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -225,7 +236,7 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -253,7 +264,7 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -281,7 +292,7 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 
@@ -307,7 +318,7 @@ public class Trip1 {
             mMap.addPolyline(rectLine);
 
             NodeList nl = doc.getElementsByTagName("html_instructions");
-            addWrittenDirections(nl, R.id.route_info_textview);
+            //addWrittenDirections(nl, R.id.route_info_textview);
         }
     }
 

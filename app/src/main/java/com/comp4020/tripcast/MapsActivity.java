@@ -132,7 +132,7 @@ public class MapsActivity extends FragmentActivity {
 
         LatLng latLng;
         if(location == null) {
-            latLng = new LatLng(47.6097,-122.3331);
+            latLng = new LatLng(49.8994,-97.1392);
         } else {
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
         }
@@ -172,13 +172,19 @@ public class MapsActivity extends FragmentActivity {
                 else if (origin.equals("phoenix") && destination.equals("orlando")) {
                     tripNum = 3;
                 }
+                else if (origin.equals("new orleans") && destination.equals("chattanooga")) {
+                    tripNum = 4;
+                }
+                else if (origin.equals("cleveland") && destination.equals("philadelphia")) {
+                    tripNum = 5;
+                }
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);
                 imm.hideSoftInputFromWindow(destinationField.getWindowToken(), 0);
 
                 //make the trip position slider visible
-                SeekBar tripPos = (SeekBar) findViewById(R.id.trip_pos);
+                final SeekBar tripPos = (SeekBar) findViewById(R.id.trip_pos);
                 tripPos.setVisibility(View.VISIBLE);
 
                 tripPos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -228,6 +234,7 @@ public class MapsActivity extends FragmentActivity {
                         route1.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 1;
+                                tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
@@ -238,6 +245,7 @@ public class MapsActivity extends FragmentActivity {
                         route2.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 2;
+                                tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
@@ -248,6 +256,7 @@ public class MapsActivity extends FragmentActivity {
                         route3.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 3;
+                                tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.INVISIBLE);
