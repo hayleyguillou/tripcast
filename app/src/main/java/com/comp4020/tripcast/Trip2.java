@@ -88,7 +88,7 @@ public class Trip2 {
                     routeInfo.setText("Total trip time: 31h");
                     break;
                 case 2: //detour through siouxFalls
-                    IconAdder.addIcon("Sun", mMap, saltLakeCity);
+                    IconAdder.addIcon("Rain", mMap, saltLakeCity);
 
                     sacramentoTosiouxFalls();
                     siouxFallsTogreenBay();
@@ -96,7 +96,7 @@ public class Trip2 {
                     routeInfo.setText("Total trip time: 31h");
                     break;
                 case 3: //detour through Kansas City
-                    IconAdder.addIcon("Tornado", mMap, saltLakeCity);
+                    IconAdder.addIcon("Rain", mMap, saltLakeCity);
 
                     sacramentoTokansasCity();
                     kansasCityTogreenBay();

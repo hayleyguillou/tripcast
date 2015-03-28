@@ -62,7 +62,7 @@ public class Trip3 {
 
                     routeInfo.setText("Total trip time: 31h");
                     break;
-                case 3: //detour through monterry
+                case 3: //detour through monterrey
                     phoenixTomonterrey();
                     monterreyToorlando();
 
