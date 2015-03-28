@@ -188,8 +188,9 @@ public class MapsActivity extends FragmentActivity {
                 imm.hideSoftInputFromWindow(originField.getWindowToken(), 0);
                 imm.hideSoftInputFromWindow(destinationField.getWindowToken(), 0);
 
+                /*
                 //make the trip position slider visible
-                final SeekBar tripPos = (SeekBar) findViewById(R.id.trip_pos);
+                final SeekBar tripPos = (SeekBar) findViewById(R.id.trip_pos); TODO: uncomment for slider
                 tripPos.setVisibility(View.VISIBLE);
 
                 tripPos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -211,6 +212,41 @@ public class MapsActivity extends FragmentActivity {
                         Trip.newTrip(tripNum, mMap, currRoute, routeInfo, progress);
                     }
                 });
+                */
+
+                Button pos0 = (Button) findViewById(R.id.pos0);
+                Button pos25 = (Button) findViewById(R.id.pos25);
+                Button pos50 = (Button) findViewById(R.id.pos50);
+                Button pos75 = (Button) findViewById(R.id.pos75);
+
+                pos0.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        //display the weather for the appropriate trip position and route
+                        Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
+                    }
+                });
+
+                pos25.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        //display the weather for the appropriate trip position and route
+                        Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 25);
+                    }
+                });
+
+                pos50.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        //display the weather for the appropriate trip position and route
+                        Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 50);
+                    }
+                });
+
+                pos75.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        //display the weather for the appropriate trip position and route
+                        Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 85);
+                    }
+                });
+
 
                 //make the route selection button visible
                 Button routeButt = (Button) findViewById(R.id.route_button);
@@ -239,7 +275,7 @@ public class MapsActivity extends FragmentActivity {
                         route1.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 1;
-                                tripPos.setProgress(0);
+                                //tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route2Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
@@ -250,7 +286,7 @@ public class MapsActivity extends FragmentActivity {
                         route2.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 2;
-                                tripPos.setProgress(0);
+                                //tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route3Info.setVisibility(View.INVISIBLE);
@@ -261,7 +297,7 @@ public class MapsActivity extends FragmentActivity {
                         route3.setOnClickListener(new Button.OnClickListener() {
                             public void onClick(View v) {
                                 currRoute = 3;
-                                tripPos.setProgress(0);
+                                //tripPos.setProgress(0);
                                 Trip.newTrip(tripNum, mMap, currRoute, routeInfo, 0);
                                 route1Info.setVisibility(View.INVISIBLE);
                                 route2Info.setVisibility(View.INVISIBLE);
@@ -296,3 +332,30 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 }
+
+/* random info could be of use
+seattle - st. louis
+1-yellow: 31h 2 rain  //via salt lake city, north platte
+1-blue: 32h 3 rain //via missoula, minneapolis
+1-mag: 39h 2 rain //via las vegas, denver
+
+sacramento - green bay
+2-yellow: 31h 3 rain //via salt lake city, des moines
+2-blue: 31 h 2 rain //via salt lake city, sioux falls
+2-mag: 34 h 3 rain //via salt lake city, kansas city
+
+phoenix - orlando
+3-yellow: 30h 0 rain //via ciudad Juarez
+3-blue: 31h 1 rain //via albuquerque, dallas
+3-mag: 38 h 1 rain //via monterrey, pensacola
+
+new orleans - chattanooga
+4-yellow: 7h 1m 3 rain meridian, birmingham
+4-blue: 8h 9m 1 rain //via jackson, birmingham
+4-mag: 8hr 20m 1 rain //via montgomery, atlanta
+
+cleveland - philadelphia
+5-yellow: 6h 32m 0 rain pittburgh, harrisburg
+5-blue: 7h 18m 1 rain //via warren, williamsport
+5-mag: 6h 41m 1 rain //via morgantown, baltimore
+ */
